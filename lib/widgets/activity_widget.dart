@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:parent_guide_application/constants/dummy_activities.dart';
 import 'package:parent_guide_application/models/activity_model.dart';
+import 'package:parent_guide_application/widgets/video_widget.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ActivityWidget extends StatelessWidget {
   final ActivityModel _activityModel;
@@ -169,12 +171,8 @@ class ActivityWidget extends StatelessWidget {
     );
   }
 
-  Container _getVideo() {
-    return Container(
-      width: double.infinity,
-      height: 270,
-      color: Colors.teal,
-    );
+  Widget _getVideo() {
+    return VideoWidget();
   }
 
   Container _getActivityExplanation() {
