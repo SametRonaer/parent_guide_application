@@ -5,15 +5,19 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class VideoWidget extends StatefulWidget {
   @override
   _VideoWidgetState createState() => _VideoWidgetState();
+  final String videoId;
+  VideoWidget(this.videoId);
 }
 
 class _VideoWidgetState extends State<VideoWidget> {
   bool videoPlay = false;
-  String thumbnailImage = YoutubePlayer.getThumbnail(videoId: "EzJPwC-MnyY");
 
   @override
   Widget build(BuildContext context) {
-    return videoPlay ? _getVideoPlayer() : _getThumbnailImage(thumbnailImage);
+    String thumbnailImage = YoutubePlayer.getThumbnail(videoId: widget.videoId);
+    return videoPlay
+        ? _getVideoPlayer(widget.videoId)
+        : _getThumbnailImage(thumbnailImage);
   }
 
   Widget _getThumbnailImage(String imageUrl) {
@@ -45,14 +49,14 @@ class _VideoWidgetState extends State<VideoWidget> {
     );
   }
 
-  Widget _getVideoPlayer() {
+  Widget _getVideoPlayer(String videoId) {
     return Container(
       width: double.infinity,
       height: 270,
       color: Colors.teal,
       child: YoutubePlayer(
         controller: YoutubePlayerController(
-          initialVideoId: 'EzJPwC-MnyY', //Add videoID.
+          initialVideoId: videoId, //Add videoID.
           flags: YoutubePlayerFlags(
             hideControls: false,
             controlsVisibleAtStart: true,

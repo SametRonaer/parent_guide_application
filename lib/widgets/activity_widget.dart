@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:parent_guide_application/constants/dummy_activities.dart';
 import 'package:parent_guide_application/models/activity_model.dart';
+import 'package:parent_guide_application/screens/activity_screen.dart';
 import 'package:parent_guide_application/widgets/video_widget.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ActivityWidget extends StatelessWidget {
   final ActivityModel _activityModel;
-  ActivityWidget(this._activityModel);
+  final String _videoID;
+  ActivityWidget(this._activityModel, this._videoID);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class ActivityWidget extends StatelessWidget {
           _getActivityTopBar(2),
           _getActivityExplanation(),
           _getVideo(),
-          _getColumnButtons(),
+          _getColumnButtons(context),
           _getRowButtons(),
           _getCommentsArea(),
         ],
@@ -108,7 +110,7 @@ class ActivityWidget extends StatelessWidget {
     );
   }
 
-  Container _getColumnButtons() {
+  Container _getColumnButtons(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 130,
@@ -144,26 +146,31 @@ class ActivityWidget extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
-          Container(
-            width: double.infinity,
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: Colors.grey[350],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Read description",
-                  style: TextStyle(
-                    color: Colors.grey.shade700,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-              ],
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(ActivityScreen.routeName);
+            },
+            child: Container(
+              width: double.infinity,
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: Colors.grey[350],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Read description",
+                    style: TextStyle(
+                      color: Colors.grey.shade700,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
             ),
           )
         ],
@@ -172,7 +179,7 @@ class ActivityWidget extends StatelessWidget {
   }
 
   Widget _getVideo() {
-    return VideoWidget();
+    return VideoWidget(_videoID);
   }
 
   Container _getActivityExplanation() {
