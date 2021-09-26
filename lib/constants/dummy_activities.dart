@@ -19,6 +19,6 @@ List<Map<String, String>> dComments = [
 ActivityModel dActivityModel1 = ActivityModel(
   title: "Stretching",
   comments: dComments,
-  purpose: "Purpose: To simulate your baby's movements when playing with cubes",
+  purpose: "To simulate your baby's movements when playing with cubes",
   videoUrl: "",
 );

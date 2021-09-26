@@ -8,7 +8,15 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class ActivityWidget extends StatelessWidget {
   final ActivityModel _activityModel;
   final String _videoID;
-  ActivityWidget(this._activityModel, this._videoID);
+  final int _activityOrder;
+  final Color? _activityColor;
+
+  ActivityWidget(
+    this._activityModel,
+    this._videoID,
+    this._activityOrder,
+    this._activityColor,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +27,7 @@ class ActivityWidget extends StatelessWidget {
       color: Colors.deepPurple,
       child: Column(
         children: [
-          _getActivityTopBar(2),
+          _getActivityTopBar(_activityOrder),
           _getActivityExplanation(),
           _getVideo(),
           _getColumnButtons(context),
@@ -148,7 +156,8 @@ class ActivityWidget extends StatelessWidget {
           SizedBox(height: 10),
           GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamed(ActivityScreen.routeName);
+              Navigator.of(context)
+                  .pushNamed(ActivityScreen.routeName, arguments: _videoID);
             },
             child: Container(
               width: double.infinity,
@@ -228,7 +237,7 @@ class ActivityWidget extends StatelessWidget {
   Container _getActivityTopBar(int activityOrder) {
     return Container(
       width: double.infinity,
-      color: Colors.blue.shade500,
+      color: _activityColor ?? Colors.red,
       padding: EdgeInsets.symmetric(vertical: 4, horizontal: 15),
       child: Row(
         children: [

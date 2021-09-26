@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:parent_guide_application/screens/activity_screen.dart';
 import 'package:parent_guide_application/screens/catalog_screen.dart';
+import 'package:parent_guide_application/screens/category_screen.dart';
 import 'package:parent_guide_application/screens/my_plan_screen.dart';
 import 'package:parent_guide_application/widgets/custom_bottom_navigation_bar.dart';
 
@@ -35,6 +36,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       //home: ActivityScreen(),
+      debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
           body: _currentScreen,
@@ -45,6 +47,7 @@ class _MyAppState extends State<MyApp> {
         MyPlanScreen.routeName: (ctx) => MyPlanScreen(),
         CatalogScreen.routeName: (ctx) => CatalogScreen(),
         ActivityScreen.routeName: (ctx) => ActivityScreen(),
+        CategoryScreen.routeName: (ctx) => CategoryScreen(),
       },
     );
   }
